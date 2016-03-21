@@ -1,4 +1,4 @@
-#!/home/Install/anaconda/bin/python
+#!/Users/Hayden/Anaconda3/python.exe
 
 import sys
 
@@ -32,8 +32,8 @@ class NumJellyEstimator:
 
         # Check that the value is between zero and one.
         if ((frac <= 0.0) or (frac >= 1.0)):
-            print "\nError: Fraction of land used for sugar must be between"\
-                  +" 0.0 and 1.0.\n"
+            print ("\nError: Fraction of land used for sugar must be between"\
+                  +" 0.0 and 1.0.\n")
             sys.exit()
 
         # Store the fraction.
@@ -45,20 +45,26 @@ class NumJellyEstimator:
     def set_world_pop(self, people):
 
         # NE24: Add a test for type here
- 
+        assert type(people) is float, \
+	   "Error: The number of people must be a floating number"
         # NE24: Add a test for value here
-
-        # Store the fraction.
+        assert people>=0, \
+	"Error: You can't have negative people!"
+        assert people%1==0, \
+       "Error: You can't have partial people!"
+       # Store the fraction.
         self.worldPop = people
 
 
     ## Set the fraction of people who love the color pink.
     def set_frac_ppl_loving_pink(self, frac):
-
+        
         # NE24: Add a test for type here
-
-        # NE24: Add a test for value here
-
+        assert type(frac) is float, \
+	   "Error: The fraction of people loving pink must be a floating number"
+        #NE24: Add a test for value here
+        assert frac>=0, \
+       "Error: A negative fraction does not make sense in this case"
         # Store the fraction.
         self.fracPplLovingPink = frac
 
@@ -77,8 +83,8 @@ class NumJellyEstimator:
         n = self.fracLand4Sugar * self.worldPop * self.scalingConst
         # If this value is zero, it means that some value didn't get set.
         if (n == 0.0):
-            print "\nError: fraction of land for sugar and world population"\
-                  +"must be set before computing estimate.\n"
+            print ("\nError: fraction of land for sugar and world population"\
+                  +"must be set before computing estimate.\n")
         return int(n)
 
 
@@ -89,12 +95,12 @@ class NumJellyEstimator:
             (1.0 - self.fracPplLovingPink)
         # If this value is zero, it means that some value didn't get set.
         if (n == 0.0):
-            print "\nError: fraction of land for sugar, world population, and"\
+            print ("\nError: fraction of land for sugar, world population, and"\
                   +"fraction of people loving pink must be set before "\
-                  +"computing estimate.\n"
+                  +"computing estimate.\n")
 
         # NE24: What other checks might be useful? What is a better way to do this?
-
+	#A unit test may be useful to check the outputs of each block of code. Here, I define the start of a block of code when a new variable is defined using the "def" command. The output could be checked with a unit test. In this case, we would replace 2-3 assertion tests per "def" command with 1 unit test per "def" command, thus making our code simpler and more compact. Further, an integration test may be useful when combining EstNumJellyBeans and ExampleInput, to ensure that the correct number of variables are being passed from EstNumJellyBeans to ExampleInput. 
         return int(n)
 
 
